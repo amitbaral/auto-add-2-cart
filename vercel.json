@@ -1,10 +1,10 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "build/client",
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/assets/(.*)", "dest": "/build/client/assets/$1" },
     { "src": "/(.*)", "dest": "/api/handler" }
   ]
 }
