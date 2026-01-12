@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npx prisma generate && npx prisma db push && npm run build",
   "installCommand": "npm install",
   "routes": [
     { "handle": "filesystem" },
