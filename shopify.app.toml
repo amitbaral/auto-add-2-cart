@@ -2,7 +2,7 @@
 
 client_id = "3fa65203399b8402461629d13c145ac2"
 name = "Auto Add2Cart"
-application_url = "https://example.com"
+application_url = "https://auto-add-2-cart.vercel.app"
 embedded = true
 
 [build]
@@ -24,9 +24,10 @@ api_version = "2026-04"
 scopes = "write_products,read_cart_transforms,write_cart_transforms"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://auto-add-2-cart.vercel.app/api/auth" ]
 
 [app_proxy]
-url = "https://example.com"
+url = "https://auto-add-2-cart.vercel.app"
 prefix = "apps"
 subpath = "auto-add2cart"
+
