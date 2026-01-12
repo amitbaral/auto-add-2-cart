@@ -124,19 +124,25 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const rulesStr = String(formData.get("rules") || "[]");
+  console.log("[SAVE DEBUG] Rules to save:", rulesStr);
 
   // 1. Get Shop ID
   const shopResponse = await admin.graphql(`
     query GetShopId {
       shop {
         id
+        name
+        myshopifyDomain
       }
     }
   `);
   const shopJson = await shopResponse.json();
   const ownerId = shopJson?.data?.shop?.id;
+  console.log("[SAVE DEBUG] Shop:", shopJson?.data?.shop?.name, shopJson?.data?.shop?.myshopifyDomain);
+  console.log("[SAVE DEBUG] Owner ID:", ownerId);
 
   if (!ownerId) {
+    console.log("[SAVE DEBUG] ERROR: Missing Shop ID");
     return { ok: false, error: "Missing Shop ID" };
   }
 
@@ -154,6 +160,8 @@ export async function action({ request }: ActionFunctionArgs) {
       ]) {
         metafields {
           id
+          namespace
+          key
         }
         userErrors {
           field
@@ -169,12 +177,15 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   const mutationJson = await mutationResponse.json();
+  console.log("[SAVE DEBUG] Mutation result:", JSON.stringify(mutationJson));
   const userErrors = mutationJson?.data?.metafieldsSet?.userErrors;
 
   if (userErrors && userErrors.length > 0) {
+    console.log("[SAVE DEBUG] User errors:", JSON.stringify(userErrors));
     return { ok: false, errors: userErrors };
   }
 
+  console.log("[SAVE DEBUG] Save successful, redirecting...");
   return new Response("", {
     status: 302,
     headers: { Location: "/app/rules?saved=1" }
