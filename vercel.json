@@ -1,16 +1,10 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "framework": null,
-  "functions": {
-    "build/server/index.js": {
-      "runtime": "@vercel/node@3"
-    }
-  },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/handler" }
-  ],
-  "env": {
-    "NPM_CONFIG_INCLUDE": "dev"
-  }
+  "outputDirectory": "build/client",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/(.*)", "dest": "/api/handler" }
+  ]
 }
