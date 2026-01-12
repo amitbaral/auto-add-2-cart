@@ -1,0 +1,39 @@
+query CartTransformRunInput {
+  shop {
+    collectionIndex: metafield(namespace: "auto_add2cart", key: "collection_index") {
+      value
+    }
+    rules: metafield(namespace: "auto_add2cart", key: "rules") {
+      value
+    }
+  }
+  cart {
+    buyerIdentity {
+      isAuthenticated
+      customer {
+        id
+        displayName
+        numberOfOrders
+      }
+    }
+    lines {
+      id
+      quantity
+      cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          product {
+            id
+          }
+        }
+      }
+    }
+  }
+}

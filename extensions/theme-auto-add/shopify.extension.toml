@@ -1,0 +1,12 @@
+api_version = "2024-10"
+name = "Auto Add to Cart"
+
+uid = "cbb72734-15ea-fc9a-b50a-c942d1e30d61b5562ee7"
+
+type = "theme"
+
+[meta]
+  hidden = false
+
+[settings]
+  embed_app = true

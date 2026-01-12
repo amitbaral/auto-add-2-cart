@@ -1,0 +1,39 @@
+{
+  "payload": {
+    "export": "cart-transform-run",
+    "target": "cart.transform.run",
+    "input": {
+      "cartTransform": {
+        "metafield": {
+          "value": "[]"
+        }
+      },
+      "cart": {
+        "buyerIdentity": {
+          "isAuthenticated": false,
+          "customer": null
+        },
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/1",
+            "quantity": 1,
+            "cost": {
+              "totalAmount": {
+                "amount": "10.00",
+                "currencyCode": "USD"
+              }
+            },
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "id": "gid://shopify/ProductVariant/111",
+              "product": { "id": "gid://shopify/Product/222" }
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": []
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{% comment %}
+  Auto Add to Cart - App Embed Block
+  This script monitors cart changes and automatically adds products based on rules.
+{% endcomment %}
+
+<script id="auto-add-settings" type="application/json">
+{
+  "proxyUrl": "{{ shop.url }}/apps/auto-add2cart/api/public-rules",
+  "shopDomain": "{{ shop.permanent_domain }}"
+}
+</script>
+
+<script src="{{ 'auto-add.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Auto Add to Cart",
+  "target": "body",
+  "settings": []
+}
+{% endschema %}
