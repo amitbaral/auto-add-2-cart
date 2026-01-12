@@ -1,9 +1,9 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "build/client",
+  "outputDirectory": "build",
   "installCommand": "npm install",
-  "framework": "remix",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "framework": null,
+  "env": {
+    "NPM_CONFIG_INCLUDE": "dev"
+  }
 }
