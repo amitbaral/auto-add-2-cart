@@ -2,7 +2,7 @@
 
 client_id = "3fa65203399b8402461629d13c145ac2"
 name = "Auto Add2Cart"
-application_url = "https://auto-add-2-cart.vercel.app"
+application_url = "https://auto-add2-cart.fly.dev"
 embedded = true
 
 [build]
@@ -24,10 +24,11 @@ api_version = "2026-04"
 scopes = "write_products,read_cart_transforms,write_cart_transforms"
 
 [auth]
-redirect_urls = [ "https://auto-add-2-cart.vercel.app/api/auth" ]
+redirect_urls = [ "https://auto-add2-cart.fly.dev/api/auth" ]
 
 [app_proxy]
-url = "https://auto-add-2-cart.vercel.app"
+url = "https://auto-add2-cart.fly.dev"
 prefix = "apps"
 subpath = "auto-add2cart"
+
 
