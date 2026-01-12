@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import { useLoaderData, useSubmit } from "react-router";
+import { useLoaderData, useSubmit, useSearchParams } from "react-router";
 import { authenticate } from "../../shopify.server";
 
 type Condition =
@@ -177,13 +177,29 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return new Response("", {
     status: 302,
-    headers: { Location: "/app/rules" }
+    headers: { Location: "/app/rules?saved=1" }
   });
 }
 
 export default function RulesPage() {
   const { rules, isTransformActive } = useLoaderData<typeof loader>();
   const submit = useSubmit();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [showSaved, setShowSaved] = React.useState(false);
+
+  // Show success message when redirected after save
+  React.useEffect(() => {
+    if (searchParams.get("saved") === "1") {
+      setShowSaved(true);
+      // Remove the query param from URL
+      searchParams.delete("saved");
+      setSearchParams(searchParams, { replace: true });
+      // Auto-hide after 5 seconds
+      const timer = setTimeout(() => setShowSaved(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams, setSearchParams]);
+
   const example: Rules = [
     {
       id: "platform-fee-tier-1",
@@ -202,6 +218,12 @@ export default function RulesPage() {
 
   return (
     <s-page heading="Auto-Add Rules">
+      {showSaved && (
+        <div style={{ marginBottom: '20px', backgroundColor: '#d4f5d4', padding: '12px 16px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontWeight: 'bold', color: '#1a7f37' }}>✓ Rules saved successfully!</span>
+          <button onClick={() => setShowSaved(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px' }}>×</button>
+        </div>
+      )}
       {!isTransformActive && (
         <div style={{ marginBottom: '20px' }}>
           <s-box padding="base" background="subdued" borderRadius="base">
